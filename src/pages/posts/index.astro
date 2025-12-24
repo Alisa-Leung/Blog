@@ -1,0 +1,30 @@
+---
+import { getCollection } from 'astro:content';
+import FormattedDate from '../../components/FormattedDate.astro';
+
+import '../../styles/global.css';
+
+const posts = (await getCollection('blog')).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+<div class="posts-page page-shell">
+    <header class="page-header">
+        <h1>Alisa's Blogs!</h1>
+        <p class="tagline">Pretty cool blogs if you ask me.</p>
+    </header>
+    {posts.length === 0 && <p class="empty">No posts yet :()</p>}
+    <div class="posts">
+        {posts.map((post) => (
+            <article class="post-card">
+                <a href={`/posts/${post.id}`} class="title-link">
+                    {post.data.title}
+                </a>
+                <p class="description">{post.data.description}</p>
+                <p class="meta">
+                    Published on <FormattedDate date={post.data.pubDate} />
+                </p>
+            </article>
+        ))}
+    </div>
+</div>
