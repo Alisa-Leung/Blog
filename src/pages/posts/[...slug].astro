@@ -16,6 +16,8 @@ const post = Astro.props;
 const { Content } = await render(post);
 ---
 <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="/Blog/speech.png" />
+<title>Alisa's Blog | {post.data.title}</title>
 <BlogPost {...post.data}>
     <Content />
 </BlogPost>
